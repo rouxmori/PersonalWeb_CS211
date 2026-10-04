@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | ALCANTARA</title>
+    <link rel="stylesheet" href="Design.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="Index.html">Home</a>
+        <a href="About Me.html">About Me</a>
+        <a href="Gallery.html">Gallery</a>
+        <a href="Portfolio.html">Portfolio</a>
+        <a href="Contact.html" class="active">Contact</a>
+    </nav>
+
+    <main class="box contact">
+        <h2>Contact Me</h2>
+        <p>Have a question, a project idea, or just want to say hi? Just fill out the form down below, and I'll read your message and reply shortly!</p>
+
+        <form id="contact-form">
+            <label>Name
+                <input type="text" name="name" autocomplete="name" required>
+            </label>
+
+            <label>Email
+                <input type="email" name="email" autocomplete="email" required>
+            </label>
+
+            <label>Subject
+                <input type="text" name="subject" required>
+            </label>
+
+            <label>Message
+                <textarea name="message" rows="6" maxlength="1000" required></textarea>
+                <span class="char-count" id="char-count">0 / 1000</span>
+            </label>
+
+            <!-- hidden spam trap: people never see it, bots fill it in -->
+            <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <button type="submit" class="btn">Send message</button>
+            <div id="form-status" role="status" aria-live="polite"></div>
+        </form>
+    </main>
+
+    <script>
+        const MY_EMAIL = "rgalcantara@ccc.edu.ph";
+        const ENDPOINT = `https://formsubmit.co/ajax/${MY_EMAIL}`;
+
+        const form      = document.getElementById("contact-form");
+        const button    = form.querySelector("button");
+        const statusBox = document.getElementById("form-status");
+        const counter   = document.getElementById("char-count");
+        const message   = form.elements.message;
+
+        function setStatus(html, type = "") {
+            statusBox.className = type;
+            statusBox.innerHTML = html;
+        }
+
+        // live character counter
+        message.addEventListener("input", () => {
+            counter.textContent = `${message.value.length} / ${message.maxLength}`;
+        });
+
+        // opens the visitor's own email app with everything filled in
+        function mailtoLink(data) {
+            const body = `${data.message}\n\n- ${data.name} (${data.email})`;
+            return `mailto:${MY_EMAIL}?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        form.addEventListener("submit", async event => {
+            event.preventDefault();
+
+            const data = Object.fromEntries(new FormData(form));
+            if (data._honey) return;                            // a bot filled the hidden field: ignore
+
+            for (const key of ["name", "subject", "message"]) data[key] = data[key].trim();
+            if (!data.name || !data.subject || !data.message) {
+                setStatus("Please fill in every field.", "error");
+                return;
+            }
+
+            button.disabled = true;
+            setStatus("Sending...");
+
+            try {
+                const response = await fetch(ENDPOINT, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                    body: JSON.stringify({
+                        ...data,
+                        _subject: `Website message: ${data.subject}`,
+                        _template: "table"
+                    })
+                });
+                const result = await response.json();
+                if (!response.ok || result.success === "false" || result.success === false) throw new Error(result.message);
+
+                form.reset();
+                counter.textContent = `0 / ${message.maxLength}`;
+                setStatus("Message sent. Thank you, I'll get back to you soon!", "success");
+            } catch (error) {
+                console.error("Contact form error:", error);
+                setStatus(`Your message couldn't be sent. <a href="${mailtoLink(data)}">Send it from your email app instead</a>.<br><small id="error-reason"></small>`, "error");
+                document.getElementById("error-reason").textContent = error.message || "";
+            } finally {
+                button.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

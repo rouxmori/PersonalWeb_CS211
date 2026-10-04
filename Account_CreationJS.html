@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MIDTERM GROUPINGS</title>
+    <style>
+        /* Center the sign-up panel on the page and give the page a neutral gray background. */
+        body {
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            background-color:gray;
+        }
+
+        /* Style the registration card that holds the sign-up form. */
+        .signup{
+            padding: 70px;
+            background-color:white;
+            margin-top: 40px;
+            height: 500px;
+            width: 400px;
+            box-shadow: 2px 2px 5px 2px black;
+            border-radius:10px;
+        }
+        #username{
+            width:100%;
+        }
+        #contact{
+            width:100%;
+        }
+        #password{
+            width:100%;
+        }
+        #confirmPassword{
+            width:100%;
+        }
+        h2{
+            text-align:center;
+        }
+        label{
+            margin-bottom: 20%;
+        }
+        button{
+            text-align: center;
+        }
+        #createAccount{
+            border-radius:10px;
+            color:white;
+            background-color: indigo;
+            padding:10px;
+            width: 100%;
+        }
+        input{
+            border-radius: 5px;
+        }
+        input:invalid:not(:placeholder-shown) {
+            border-color: #d32f2f;
+            background: #fff5f5;
+        }
+        .inputError{
+            display:none;
+            color:red;
+            font-size: 12px;
+            margin: 4px 0 0 0;
+        }
+        input:invalid:not(:placeholder-shown) + .inputError {
+            display: block;
+        }
+    </style>
+    <script>
+
+    </script>
+</head>
+<body>
+    <!-- This is the main account creation form. It collects a username, phone number, and password before submitting. -->
+    <div class="signup">
+    <form>
+        <h2> Complete Sign-Up </h2>
+        <!-- Username field: must be 4 to 12 letters or numbers only. -->
+        <label>Username (Alphanumeric, 4-12 characters)</label>
+        <br>
+        <input type="text" id="username" autocomplete="off" required pattern="[A-Za-z0-9]{4,12}" placeholder=" ">  
+        <p class="inputError">Must be 4-12 characters and contain only letters and numbers.</p>
+        <br>
+        <br>
+        <!-- Phone number field: only a 10-digit format is accepted. -->
+        <label>Phone Number (10 digits)</label>
+        <br>
+        <input type="tel" id="contact" autocomplete="off"  pattern="[0-9]{10}" placeholder=" ">
+        <p class="inputError">Please enter a valid 10-digit phone number.</p>
+        <br>
+        <br>
+        <!-- Password field: must be at least 8 characters and include both letters and numbers. -->
+        <label>Password (min 8 chars, 1 letter & number)</label>
+        <br>
+        <input type="password" id="password" autocomplete="off">
+        <br>
+        <br>
+        <!-- Confirm password field to ensure the user entered the same password twice. -->
+        <label>Confirm Password</label>
+        <br>
+        <input type="password" id="confirmPassword" autocomplete="off">
+        <br>
+        <br>
+        <button type="submit" id="createAccount">Create Account</button>
+    </form>
+    </div>
+
+    <script>
+        // Get references to the form and all input elements so validation can be enforced before submission.
+        const form = document.querySelector('form');
+        const usernameInput = document.getElementById('username');
+        const contactInput = document.getElementById('contact');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+
+        // As the user types, check whether the password meets the minimum security rules.
+        // This prevents weak passwords and immediately updates the error state while the user is typing.
+        passwordInput.addEventListener('input', function () {
+            const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
+
+            if (!passwordPattern.test(passwordInput.value)) {
+                passwordInput.setCustomValidity('Must be at least 8 characters long with 1 letter and 1 number.');
+            } else {
+                passwordInput.setCustomValidity('');
+            }
+
+            if (confirmPasswordInput.value !== '') {
+                checkPasswordMatch();
+            }
+        });
+
+        // Ensure the confirmed password matches the original password exactly before form submission.
+        function checkPasswordMatch() {
+            if (confirmPasswordInput.value !== passwordInput.value) {
+                confirmPasswordInput.setCustomValidity('Passwords do not match.')
+            } else {
+                confirmPasswordInput.setCustomValidity('');
+            }
+        }
+
+        // Re-check the match each time the user edits the confirmation field.
+        confirmPasswordInput.addEventListener('input', checkPasswordMatch);
+
+        // Prevent the page from reloading and validate the form before showing success.
+        // If the form passes all built-in validation rules, the account is created; otherwise, browser validation messages appear.
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            if (form.checkValidity()) {
+                alert('Account created successfully!');
+                form.reset();
+            } else {
+                form.reportValidity();
+            }
+        });
+    </script>
+</body>
+</html>
+
+<!-- Alcantara, Suelto, Mendoza, Locaberte
+2-CS2 -->

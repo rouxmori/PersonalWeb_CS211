@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | ALCANTARA</title>
+    <link rel="stylesheet" href="Design.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="Index.html">Home</a>
+        <a href="About Me.html">About Me</a>
+        <a href="Gallery.html" class="active">Gallery</a>
+        <a href="Portfolio.html">Portfolio</a>
+        <a href="Contact.html">Contact</a>
+    </nav>
+
+    <main class="box gallery">
+        <h2>My Gallery</h2>
+        <p>A small collection of my own pictures over the years.</p>
+
+        <div class="mygallery">
+            <!-- To add a picture, copy one <figure> block and change the file name, alt text, and caption -->
+            <figure class="gallery-item">
+                <img src="gallery\19950c86-d5e7-4e42-a28b-0f6ed97a0d69 (1).jpg" loading="lazy">
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="gallery\bc25aaff-d0bd-4112-8572-40096b982674.jpg" loading="lazy" style="object-position:50% 35%;">
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="gallery\e113d203-d3d7-4251-b8e2-0cc979abfc49.jpg" loading="lazy">
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="gallery\4f58ec3d-fa24-4e32-b432-797d48bd134d.jpg" loading="lazy" style="object-position:50% 90%;">
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="gallery\9dfa66d1-538b-4dae-820e-bb0dc3ca33c4.jpg" loading="lazy" style="object-position:50% 25%;">
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="gallery\c20a108f-a5da-4dfd-966e-7cfe3559bada.jpg" loading="lazy" style="object-position:50% 40%;">
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="gallery\0f59dbcd-aeb1-4b99-ae4e-8b7e1a814594 (1).jpg"loading="lazy">
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="gallery\3aaa16c6-03bf-411b-9bb0-5e8fe5f7baa1.jpg" loading="lazy">
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="gallery\067a392d-9be9-4f27-a414-9a82880a89e8.jpg" loading="lazy">
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="gallery\7852ea7f-705f-4d62-88ad-8f672be2559b.jpg" loading="lazy" style="object-position:50% 20%;">
+            </figure>
+        </div>
+
+        <p>And of course, who am I without the people I cherish. So here's a dedicated section to them too.</p>
+
+        <div class="friendgallery">
+
+            <figure class="gallery-item">
+            <img src="gallery\b86adb11-4ea7-4077-b469-9d2605f631e8.jpg" loading="lazy" style="object-position:50% 75%;">
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="gallery\b2602953-b1c0-474f-89d2-c9d9d5065875.jpg" alt="Describe the sixth picture" loading="lazy">
+            </figure>
+            
+            <figure class="gallery-item">
+                <img src="gallery\f0d2b4da-a305-4216-984a-6aa4a9c7f151.jpg" loading="lazy">
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="gallery\69c7d8b3-eea4-4b51-8ac5-ccd7f034e54a.jpg" loading="lazy">
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="gallery\825348443_1112447561225288_4252521420622317552_n.jpg" loading="lazy">
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="gallery\825311107_1141853764846840_6955316941862383629_n.jpg" loading="lazy">
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="gallery\e5ab809e-00da-42c2-97f2-cf1c76d44b8e.jpg" loading="lazy">
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="gallery\5bd71ba7-e223-47cd-a7e4-1eb846c21ae9.jpg" loading="lazy">
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="gallery\40fb1b42-852b-423b-88d0-e7839a689cf8.jpg" loading="lazy">
+            </figure>
+
+            <figure class="gallery-item">
+                <img src="gallery\IMG_20260911_134016_929.webp" loading="lazy">
+            </figure>
+
+            </figure>
+        </div>
+    </main>
+</body>
+
+<script>
+    (() => {
+    // every picture that should open in the viewer
+    const PHOTOS = ".gallery-item img, .mygallery img, .friendgallery img, .gallery-grid img";
+
+    // uses the <dialog id="viewer"> from the HTML if it exists, otherwise creates it
+    function getViewer() {
+        let viewer = document.getElementById("viewer");
+        if (!viewer) {
+            viewer = document.createElement("dialog");
+            viewer.id = "viewer";
+            viewer.setAttribute("aria-label", "Photo viewer");
+            viewer.innerHTML = `
+                <button class="viewer-btn viewer-close" aria-label="Close">&times;</button>
+                <button class="viewer-btn viewer-prev" aria-label="Previous photo">&#129032;</button>
+                <figure><img alt=""><figcaption></figcaption></figure>
+                <button class="viewer-btn viewer-next" aria-label="Next photo">&#129034;</button>`;
+            document.body.append(viewer);
+        }
+        return viewer;
+    }
+
+    function init() {
+        const viewer        = getViewer();
+        const viewerImg     = viewer.querySelector("img");
+        const viewerCaption = viewer.querySelector("figcaption");
+        let group = [];   // the pictures of the gallery that was clicked, so prev/next stays inside it
+        let index = 0;
+
+        function show(n) {
+            index = (n + group.length) % group.length;     // wraps at both ends
+            const img = group[index];
+            viewerImg.src = img.dataset.full || img.currentSrc || img.src;
+            viewerImg.alt = img.alt;
+            viewerCaption.textContent = img.closest("figure")?.querySelector("figcaption")?.textContent ?? img.alt;
+        }
+
+        function openViewer(img) {
+            const gallery = img.closest(".mygallery, .friendgallery, .gallery-grid") || img.closest(".gallery") || document;
+            group = [...gallery.querySelectorAll(PHOTOS)].filter(p => !p.closest("#viewer"));
+            show(group.indexOf(img));
+            viewer.showModal();                            // Esc closes it automatically
+        }
+
+        // make the pictures reachable with the keyboard
+        const photos = [...document.querySelectorAll(PHOTOS)].filter(p => !p.closest("#viewer"));
+        photos.forEach(img => { img.tabIndex = 0; img.setAttribute("role", "button"); });
+
+        // one listener for all pictures (also works for pictures added later)
+        document.addEventListener("click", event => {
+            const img = event.target.closest(PHOTOS);
+            if (!img || img.closest("#viewer")) return;
+            event.preventDefault();                        // in case the picture sits inside a link
+            openViewer(img);
+        });
+
+        document.addEventListener("keydown", event => {
+            const img = document.activeElement;
+            if (img?.matches?.(PHOTOS) && (event.key === "Enter" || event.key === " ")) {
+                event.preventDefault();
+                openViewer(img);
+            }
+        });
+
+        viewer.querySelector(".viewer-prev").addEventListener("click", () => show(index - 1));
+        viewer.querySelector(".viewer-next").addEventListener("click", () => show(index + 1));
+        viewer.querySelector(".viewer-close").addEventListener("click", () => viewer.close());
+
+        // clicking the dark area outside the picture closes it
+        viewer.addEventListener("click", event => {
+            if (event.target === viewer) viewer.close();
+        });
+
+        viewer.addEventListener("keydown", event => {
+            if (event.key === "ArrowLeft")  show(index - 1);
+            if (event.key === "ArrowRight") show(index + 1);
+        });
+
+        console.info(`Photo viewer ready: ${photos.length} photos found`);
+    }
+
+    // run once the page has been read, wherever the script tag is placed
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+    else init();
+})();
+</script>
+</html>

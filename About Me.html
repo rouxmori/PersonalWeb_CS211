@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | ALCANTARA</title>
+    <link rel="stylesheet" href="Design.css">
+    <script src="about.js" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="Index.html">Home</a>
+        <a href="About Me.html" class="active">About Me</a>
+        <a href="Gallery.html">Gallery</a>
+        <a href="Portfolio.html">Portfolio</a>
+        <a href="Contact.html">Contact</a>
+    </nav>
+
+    <div class="about-me">
+        <h1>About Me....</h1>
+        <p>Apart from what I said in the Home Page, I suppose I should share some of my personal information, my skills, as well as some of my hobbies and interests.</p>
+        <p>This way, we can get to know each other better; who knows, maybe we have similar things in common. :P</p>
+        <img src="icons/portrait.png" alt="Illustrated portrait">
+    </div>
+
+    <div class="info-grid">
+
+        <div class="box box-wide">
+            <h2>Education</h2>
+            <p>My academic journey includes studying at the City College of Calamba, but I am also molded by experiences I have gained through past campuses. Here is my educational background:</p>
+            <div class="carousel-layout">
+                <div class="carousel" data-set="education"></div>
+                <p class="slide-description"></p>
+            </div>
+        </div>
+
+        <div class="box">
+            <h2>Course Skills</h2>
+            <p>As a Computer Science student, I have learned a number of knowledge and skills about multiple programming languages. Here are some of my skills:</p>
+            <div class="carousel" data-set="course"></div>
+        </div>
+
+        <div class="box">
+            <h2>General Skills</h2>
+            <p>Aside from my field skills, I also have some general skills that I have learned throughout my academic years. Here are some of them:</p>
+            <div class="carousel" data-set="general"></div>
+        </div>
+
+        <div class="box box-wide">
+            <h2>Interests and Hobbies</h2>
+            <p>Everyone has pastimes they enjoy, here are some of mine, each accompanied by media related to that hobby that I particularly enjoy:</p>
+            <div class="hobby-viewer">
+                <button class="arrow prev" aria-label="Previous hobby">&#129032;</button>
+                <div class="hobby-content">
+                    <h3 class="hobby-name"></h3>
+                    <p class="hobby-desc"></p>
+                    <div class="media-grid"></div>
+                </div>
+                <button class="arrow next" aria-label="Next hobby">&#129034;</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
