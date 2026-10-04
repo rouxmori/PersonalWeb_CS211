@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Array & Loop</title>
+</head>
+
+<body>
+	<h1>Class Attendance - JavaScript Array and Loop</h1>
+
+	<form>
+		<label>Enter Full Name:</label>
+		<input type="text" id="studentName" placeholder="Enter full name">
+		<button type="button" id="students">Add Student</button>
+	</form>
+
+	<h2>Attendance List</h2>
+
+	<p id="list"></p>
+
+	<script>
+		// Array
+		let classNames = [];
+
+		document.getElementById("students").addEventListener("click", clickFunction);
+
+		function clickFunction() {
+			let nameInput = document.getElementById("studentName");
+			let name = nameInput.value.trim();
+
+			if (name == "") {
+				alert("Please enter a name.");
+				return;
+			}
+
+			// Date/Time
+			let now = new Date();
+			let timestamp = now.toLocaleString();
+
+			classNames.push({ name: name, time: timestamp });
+
+			nameInput.value = "";
+
+			displayNames();
+		}
+		// Loop
+		function displayNames() {
+			let output = "";
+
+			for (let i = 0; i < classNames.length; i++) {
+				output += (i + 1) + ". " + classNames[i].name +
+					" <small>(" + classNames[i].time + ")</small><br>";
+			}
+
+			document.getElementById("list").innerHTML = output;
+		}
+	</script>
+</body>
+</html>

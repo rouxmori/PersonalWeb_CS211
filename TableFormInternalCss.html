@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Act 2</title>
+<style>
+	body {
+		background-color: white;
+		margin: 0;
+	}
+	.astralheader {
+		background-color: lightblue;
+		color: darkblue;
+		gap: 10px;
+		display: flex;
+		align-items: center;
+		padding: 10px 20px;
+	}
+	.mainlayout {
+		font-family: georgia;
+		display: flex;
+		align-items: stretch;
+		gap: 20px;
+		margin: 20px 0 0 30px;
+	}
+	.astralregistry {
+		font-family: georgia;
+		background-color: lightblue;
+		border-radius: 10px;
+		display: flex;
+		justify-content: center;
+		text-align: center;
+		padding: 10px 25px 20px;
+		box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+	}
+	.astralregistry form {
+		font-family: georgia;
+		width: 100%;
+		display: flex;
+	}
+	fieldset {
+		border: none;
+		width: 100%;
+		background-color: lightblue;
+		color: darkblue;
+		margin: 0;
+		padding: 5px 15px 20px;
+		padding-top: 0;
+		border-radius: 10px;
+		display: flex;
+		flex-direction: column;
+	}
+	label {
+		font-size: 20px;
+		display: block;
+		margin-top: 2px;
+	}
+	input {
+		display: block;
+		width: 90%;
+		padding: 4px 6px;
+		margin-bottom: 8px;
+	}
+	button {
+		font-family: georgia;
+		font-size: 18px;
+		margin: 5px;
+		padding: 14px 28px;
+		background-color: white;
+		color: darkblue;
+		text-align: center;
+		display:flex;
+		justify-content:center;
+		gap:10px;
+	}
+	.passengerhead {
+		color: darkblue;
+		padding: 20px;
+		margin: 5px;
+		padding-top: 10px;
+	}
+	.passengerbox {
+		font-family: georgia;
+		background-color: white;
+		border-radius: 10px;
+		display: flex;
+		justify-content: center;
+		text-align: center;
+		padding: 10px 25px 20px;
+		box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+	}
+	.passengerhead h2 {
+		border-bottom: solid darkblue 2px;
+		padding-bottom: 10px;
+	}
+	.astralpassengers {
+		font-size: 15px;
+		color: darkblue;
+		background-color: darkblue;
+		padding: 0px;
+		border-radius: 5px;
+		text-align: center;
+		align-items: left;
+		justify-content: left;
+	}
+	th {
+		font-size:20px;
+		background-color: lightblue;
+		color: darkblue;
+	}
+	td {
+		font-size: 20px;
+		background-color: white;
+		color: darkblue;
+		padding: 10px;
+	}
+	.astralreminder {
+		font-family: georgia;
+		background-color: white;
+		color: darkblue;
+		margin: 20px 30px 0;
+		padding: 30px 40px;
+		border-radius: 10px;
+		border-left: 6px solid darkblue;
+		box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+		box-sizing: border-box;
+		min-height: 120px;
+	}
+	.astralreminder h3 {
+		margin: 0 0 10px;
+		font-size: 24px;
+	}
+	.astralreminder p {
+		margin: 0;
+		font-size: 20px;
+		font-weight: normal;
+	}
+	footer {
+		font-family: georgia;
+		font-size: 30px;
+		color: darkblue;
+		background-color: lightblue;
+		display: flex;
+		padding: 10px;
+		justify-content: center;
+		max-width: 100%;
+		max-height: 70%;
+		box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+	}
+	textarea {
+		align-self: center;
+	}
+</style>
+</head>
+<body>
+
+	<div class="astralheader">
+		<img src="C:\Users\ACER\OneDrive\Desktop\Andrei Files\VSCode\Personal Website\icons\trailblaze.webp" alt="trailblaze" height="150" width="150" />
+		<div style="align-items:center;">
+			<h2 style="font-family:georgia; font-size:40px; margin:5px 0;">The Astral University</h2>
+			<h3 style="font-family:georgia; font-style:italic; font-weight:normal; padding:5px 10px; margin:0; font-size:20px;">"May this journey lead us starward."</h3>
+		</div>
+	</div>
+
+	<div class="mainlayout">
+		<div class="astralregistry">
+			<form>
+				<fieldset>
+					<h3 style="font-size:30px; border-bottom:solid darkblue 2px; padding-bottom:20px;">Registration Form</h3>
+
+					<!-- STUDENT NAME -->
+					<label for="studentname">Full Name: </label>
+					<input type="text" id="studentname" name="studentname">
+
+					<!-- PASSWORD -->
+					<br>
+					<label for="password">Password: </label>
+					<input type="password" id="password" name="password">
+					<br>
+					<label for="pwconfirmation">Confirm Password: </label>
+					<input type="password" id="pwconfirmation" name="pwconfirmation">
+
+					<!-- CONTACT INFO -->
+					<br>
+					<label for="contactNumber">Contact Number: </label>
+					<input type="text" id="contactNumber" name="contactNumber">
+
+					<!-- PLANET OF ORIGIN -->
+					<br>
+					<label for="originplanet">Planet of Origin: </label>
+					<input type="text" id="originplanet" name="originplanet">
+
+					<!-- COURSE -->
+					<br>
+					<label for="course">Course: </label>
+					<input list="courses" id="course" name="course">
+					<datalist id="courses">
+						<option value="Astral Navigation">
+						<option value="Express Operation">
+						<option value="Stellar Research">
+						<option value="Trailblazing">
+					</datalist>
+
+					<!-- ABOUT -->
+					<br>
+					<label for="trivia">Tell us about your past travails:</label>
+					<textarea id="trivia" name="trivia" rows="5" cols="36"></textarea>
+
+					<!-- BUTTONS -->
+					<br>
+						<button type="submit">Register</button>
+						<button type="reset">Clear</button>
+				</fieldset>
+			</form>
+		</div>
+
+		<div class="passengerbox">
+			<div class="passengerhead">
+				<h2 style="font-size:30px;">Registered Passengers</h2>
+
+				<div class="astralpassengers">
+					<table style="width:100%; table-layout:fixed;">
+						<tr>
+							<th style="padding:15px;">Passenger Profile</th>
+							<th style="padding:15px;">Name</th>
+							<th style="padding:15px;">Course</th>
+							<th style="padding:15px;">Planet of Origin</th>
+							<th style="padding:15px;">Status</th>
+						</tr>
+						<tr>
+							<td><img src="C:\Users\ACER\OneDrive\Desktop\Andrei Files\VSCode\Personal Website\icons\sunday.webp" height="80" width="80" /></td>
+							<td>Sunday</td>
+							<td>Trailblazing</td>
+							<td>Penacony</td>
+							<td>Active</td>
+						</tr>
+						<tr>
+							<td><img src="C:\Users\ACER\OneDrive\Desktop\Andrei Files\VSCode\Personal Website\icons\caelus.webp" alt="caelus" height="80" width="80" /></td>
+							<td>Caelus</td>
+							<td>Trailblazing</td>
+							<td>???</td>
+							<td>Active</td>
+						</tr>
+						<tr>
+							<td><img src="C:\Users\ACER\OneDrive\Desktop\Andrei Files\VSCode\Personal Website\icons\march.webp" alt="march" height="80" width="80" /></td>
+							<td>March 7th</td>
+							<td>Trailblazing</td>
+							<td>???</td>
+							<td>Active</td>
+						</tr>
+						<tr>
+							<td><img src="C:\Users\ACER\OneDrive\Desktop\Andrei Files\VSCode\Personal Website\icons\danheng.webp" alt="dheng" height="80" width="80" /></td>
+							<td>Dan Heng</td>
+							<td>Trailblazing</td>
+							<td>The Xianzhou Luofu</td>
+							<td>Active</td>
+						</tr>
+						<tr>
+							<td><img src="C:\Users\ACER\OneDrive\Desktop\Andrei Files\VSCode\Personal Website\icons\welt.webp" alt="welt" height="80" width="80" /></td>
+							<td>Welt Yang</td>
+							<td>Stellar Research</td>
+							<td>Intergalactic</td>
+							<td>Active</td>
+						</tr>
+						<tr>
+							<td><img src="C:\Users\ACER\OneDrive\Desktop\Andrei Files\VSCode\Personal Website\icons\himeko.webp" alt="himeko" height="80" width="80" /></td>
+							<td>Murata Himeko</td>
+							<td>Astral Navigation</td>
+							<td>Planarcadia</td>
+							<td>Active</td>
+						</tr>
+						<tr>
+							<td><img src="C:\Users\ACER\OneDrive\Desktop\Andrei Files\VSCode\Personal Website\icons\misha.webp" alt="mikhail" height="80" width="80" /></td>
+							<td>Mikhail Char Legwork</td>
+							<td>Astral Navigation</td>
+							<td>Lushaka</td>
+							<td>Unboarded</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="astralreminder">
+		<h3>Reminder!</h3>
+		<p>Aspiring Trailblazer, please complete the necessary information before venturing into the stars.</p>
+	</div>
+
+	<br>
+	<footer>
+		Ron Andrei G. Alcantara - IICS2 / The Cosmos, Wherever People Yearn for the Trailblaze
+	</footer>
+
+</body>
+</html>

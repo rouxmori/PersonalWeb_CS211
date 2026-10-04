@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Act 1 Midterms</title>
+</head>
+
+<body>
+	<form>
+		<label for="fname">Full Name: </label>
+		<input type="text" id="fname" placeholder="Surname, First Name, M.">
+		<br><br>
+		
+		<label>Year & Section: </label>
+		<select id="yns">
+		<option>2CS-1</option>
+		<option>2CS-2</option>
+		<option>2CS-3</option>
+		<option>2CS-4</option>
+		</select>
+		<br><br>
+		
+		<label for="age">Age: </label>
+		<input type="number" id="age" placeholder="Number Only">
+		<br><br>
+		
+		<button type="button" onclick="checkAge()">Submit</button>	
+		
+		<p id="result"></p>
+	</form>
+	
+	<script>
+		function checkAge(){
+			const ageInput = document.getElementById("age");
+			const ageVerification = document.getElementById("result");
+			const fullName = document.getElementById("fname");
+			const YearNSection = document.getElementById("yns");
+			
+			const ageValue = Number(ageInput.value);
+			
+			if (ageValue >= 18){
+				ageVerification.textContent = "Welcome, " + fullName.value + ", " + ageInput.value + " years old, " + YearNSection.value;
+				ageVerification.style.color = "green";
+			}
+			else {
+				ageVerification.textContent = "Sorry, you are not of legal age, you are " + ageInput.value + " years old.";
+				ageVerification.style.color = "red";
+			}
+		}
+	</script>
+</body>
+</html>
