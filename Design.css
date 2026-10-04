@@ -28,20 +28,19 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
 
 .fade { opacity: 0; }
 
-/* ============ Seamless page transitions ============ */
+/* ============ Page transitions ============ */
 @view-transition { navigation: auto; }
-
-/* navbar is its own layer, so it stays put while the page content fades */
-.navbar { view-transition-name: navbar; }
 
 ::view-transition-old(root) { animation: 0.25s ease-in both vt-out; }
 ::view-transition-new(root) { animation: 0.35s ease-out both vt-in; }
 
-@keyframes vt-out { to   { opacity: 0; transform: translateY(-8px); } }
-@keyframes vt-in  { from { opacity: 0; transform: translateY(8px);  } }
+/* the home arrow lifts away on click */
+::view-transition-old(next-arrow) { animation: 0.25s ease-in both arrow-out; }
+::view-transition-new(next-arrow) { animation: none; }
 
-/* ============ Page transitions (pages fade into each other) ============ */
-@view-transition { navigation: auto; }
+@keyframes vt-out    { to   { opacity: 0; transform: translateY(-8px); } }
+@keyframes vt-in     { from { opacity: 0; transform: translateY(8px); } }
+@keyframes arrow-out { to   { opacity: 0; transform: scale(0.6) translateY(12px); } }
 
 ::view-transition-old(root),
 ::view-transition-new(root) { animation-duration: 0.4s; }
@@ -52,6 +51,7 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     top: 0;
     z-index: 100;
     view-transition-name: navbar;  
+    view-transition-name: next-arrow;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
