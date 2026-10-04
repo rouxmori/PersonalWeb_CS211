@@ -7,51 +7,52 @@
     --radius: 0.5rem;
     --shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
-
+ 
 *, *::before, *::after { box-sizing: border-box; }
-
+ 
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+ 
 body {
     margin: 0;
     background: var(--bg);
     color: var(--ink);
     font-family: georgia, serif;
+    overflow-wrap: break-word;
 }
-
-h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
-
+ 
+img { max-width: 100%; }
+ 
+h1 { font-size: clamp(30px, 7vw, 80px); margin: 0; }
+ 
 /* every white card shares one look */
 .introduction, .about-me, .box, .portfolio, .collapse {
     background: #fff;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
 }
-
+ 
 .fade { opacity: 0; }
-
+ 
 /* ============ Page transitions ============ */
 @view-transition { navigation: auto; }
-
+ 
 ::view-transition-old(root) { animation: 0.25s ease-in both vt-out; }
 ::view-transition-new(root) { animation: 0.35s ease-out both vt-in; }
-
+ 
 /* the home arrow lifts away on click */
 ::view-transition-old(next-arrow) { animation: 0.25s ease-in both arrow-out; }
 ::view-transition-new(next-arrow) { animation: none; }
-
+ 
 @keyframes vt-out    { to   { opacity: 0; transform: translateY(-8px); } }
 @keyframes vt-in     { from { opacity: 0; transform: translateY(8px); } }
 @keyframes arrow-out { to   { opacity: 0; transform: scale(0.6) translateY(12px); } }
-
-::view-transition-old(root),
-::view-transition-new(root) { animation-duration: 0.4s; }
-
+ 
 /* ============ Navbar (sticky on every page) ============ */
 .navbar {
     position: sticky;
     top: 0;
     z-index: 100;
-    view-transition-name: navbar;  
-    view-transition-name: next-arrow;
+    view-transition-name: navbar;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -61,7 +62,7 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     background: var(--accent);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
-
+ 
 .navbar a {
     padding: 5px 12px;
     border-radius: 6px;
@@ -69,14 +70,14 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     text-decoration: none;
     transition: background-color 0.2s;
 }
-
+ 
 .navbar a:hover { background: rgba(255, 255, 255, 0.25); }
-
+ 
 .navbar a.active {
     border-bottom: 3px solid var(--ink);
     border-radius: 6px 6px 0 0;
 }
-
+ 
 /* ============ Home ============ */
 .header-container {
     display: flex;
@@ -84,7 +85,7 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     gap: 25px;
     padding: 15px 20px;
 }
-
+ 
 .header-container img {
     width: 180px;
     height: 180px;
@@ -93,9 +94,9 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     border-radius: 50%;
 }
 
-/* social icons: every icon gets an identical 50px box */
 .socials {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 20px;
@@ -103,23 +104,23 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     padding: 10px;
     background: var(--accent);
 }
-
+ 
 .socials a { display: block; width: 50px; height: 50px; }
-
+ 
 .socials img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: contain;           
+    object-fit: contain;
 }
-
+ 
 .homecontent { padding: 25px 20px 20px; margin-bottom: 20px; }
-
+ 
 .homecontent p {
     font-size: 20px;
     text-align: center;
 }
-
+ 
 .introduction {
     max-width: 90%;
     margin: 0 auto;
@@ -127,10 +128,10 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     font-size: 20px;
     line-height: 1.6;
 }
-
+ 
 .introduction h2 { margin: 0 0 10px; }
 .introduction p { text-align: justify; }
-
+ 
 .next-arrow {
     --dy: 8px;
     display: block;
@@ -147,11 +148,11 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     animation: nudge 1.5s infinite;
     view-transition-name: next-arrow;
 }
-
+ 
 @keyframes nudge {
     50% { translate: var(--dx, 0) var(--dy, 0); }
 }
-
+ 
 /* ============ About Me: header card ============ */
 .about-me {
     display: grid;
@@ -161,11 +162,11 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     padding: 10px 20px 0;
     line-height: 1.5;
 }
-
+ 
 .about-me h1, .about-me p { grid-column: 1; }
 .about-me h1 { margin-top: 20px; padding: 10px; font-size: 40px; }
 .about-me p { font-size: 20px; }
-
+ 
 .about-me img {
     grid-column: 2;
     grid-row: 1 / span 3;
@@ -174,7 +175,7 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     max-width: 100%;
     height: auto;
 }
-
+ 
 /* ============ About Me: box grid ============ */
 .info-grid {
     display: grid;
@@ -182,14 +183,14 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     gap: 20px;
     margin: 20px;
 }
-
+ 
 .box { display: flex; flex-direction: column; padding: 10px 20px 20px; }
 .box h2 { margin: 10px 0; font-size: 30px; text-align: center; }
 .box p { margin: 0; padding: 20px; font-size: 20px; line-height: 1.5; }
-
+ 
 .box-wide { grid-column: 1 / -1; }
 .box-wide > p { text-align: center; text-wrap: balance; }
-
+ 
 /* ============ Carousel (course skills, general skills, education) ============ */
 .carousel {
     display: flex;
@@ -198,9 +199,9 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     gap: 15px;
     padding-top: 20px;
 }
-
+ 
 .slide { margin: 0; text-align: center; transition: opacity 0.2s; }
-
+ 
 .slide img {
     display: block;
     width: 220px;
@@ -208,9 +209,9 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     margin: 0 auto;
     object-fit: contain;
 }
-
+ 
 .slide figcaption { margin-top: 10px; font-size: 20px; font-weight: bold; }
-
+ 
 .skill-year {
     display: block;
     margin-top: 4px;
@@ -218,9 +219,9 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     font-weight: normal;
     opacity: 0.8;
 }
-
+ 
 .skill-img[src$="sti.png"] { padding: 20px; }
-
+ 
 /* education: logo on the left, description on the right */
 .carousel-layout {
     display: grid;
@@ -229,21 +230,22 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     align-items: center;
     min-height: 380px;
 }
-
+ 
 .carousel-layout .slide { width: 300px; }
 .carousel-layout .slide figcaption { min-height: 100px; }
-
+ 
 .box .slide-description {
     text-align: justify;
     text-indent: 2em;
     hyphens: auto;
     transition: opacity 0.2s;
 }
-
+ 
 /* ============ Arrows ============ */
 .arrow {
     flex: 0 0 60px;
     width: 60px;
+    min-height: 44px;
     border: 0;
     background: none;
     font-size: 60px;
@@ -251,12 +253,13 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     color: #1e1e1e;
     cursor: pointer;
     transition: transform 0.1s;
+    -webkit-tap-highlight-color: transparent;
 }
-
+ 
 .arrow:active { transform: scale(0.92); }
 .arrow.prev:hover { --dx: -8px; animation: nudge 1.5s infinite; }
 .arrow.next:hover { --dx: 8px;  animation: nudge 1.5s infinite; }
-
+ 
 /* ============ Hobbies viewer ============ */
 .hobby-viewer {
     display: flex;
@@ -264,15 +267,15 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     justify-content: space-between;
     gap: 5px;
 }
-
+ 
 .hobby-viewer .arrow { flex-basis: 40px; width: 40px; font-size: 40px; }
-
+ 
 .hobby-content { flex: 1; min-width: 0; transition: opacity 0.2s; }
 .hobby-content h3 { margin: 0 0 10px; font-size: 28px; text-align: center; }
 .box .hobby-desc { max-width: 700px; margin: 0 auto 30px; text-align: center; text-wrap: balance; }
-
+ 
 .media-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; }
-
+ 
 .media-item {
     position: relative;
     width: 200px;
@@ -280,7 +283,7 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     text-align: center;
     outline: none;
 }
-
+ 
 .media-item img {
     display: block;
     width: 100%;
@@ -290,7 +293,7 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     box-shadow: var(--shadow);
     transition: transform 0.25s, box-shadow 0.25s;
 }
-
+ 
 .media-item figcaption {
     min-height: 2.8em;
     margin-top: 12px;
@@ -301,23 +304,23 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     transform: translateY(-4px);
     transition: opacity 0.25s, transform 0.25s;
 }
-
+ 
 .media-item:is(:hover, :focus) { z-index: 2; }
-
+ 
 .media-item:is(:hover, :focus) img {
     transform: translateY(-8px) scale(1.08);
     box-shadow: 4px 10px 14px rgba(0, 0, 0, 0.4);
 }
-
+ 
 .media-item:is(:hover, :focus) figcaption { opacity: 1; transform: none; }
-
+ 
 /* ============ Portfolio ============ */
 .portfolio { margin: 20px; padding: 10px 20px 20px; }
 .portfolio h1 { margin-top: 20px; padding: 10px; font-size: 40px; text-align: center; }
 .portfolio > p { margin: 0; font-size: 20px; line-height: 1.5; text-align: center; }
-
+ 
 .collapse { margin: 20px; overflow: hidden; }
-
+ 
 .collapse summary {
     display: flex;
     justify-content: space-between;
@@ -330,12 +333,12 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     cursor: pointer;
     transition: background-color 0.2s;
 }
-
+ 
 .collapse summary::-webkit-details-marker { display: none; }
 .collapse summary:hover { background: var(--accent-light); }
 .collapse summary::after { content: "\25BC"; font-size: 18px; transition: transform 0.3s; }
 .collapse[open] summary::after { transform: rotate(180deg); }
-
+ 
 .collapse .count {
     margin: 0 15px 0 auto;
     padding: 2px 10px;
@@ -344,9 +347,9 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     font-size: 14px;
     font-weight: normal;
 }
-
+ 
 .collapse-content { padding: 0 20px 20px; font-size: 20px; line-height: 1.5; }
-
+ 
 .project-card {
     margin-top: 15px;
     padding: 15px;
@@ -354,18 +357,21 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     background: var(--bg);
     box-shadow: var(--shadow);
 }
-
+ 
+.project-card h3, .reflection h3 { margin: 0 0 5px; font-size: 22px; }
+.project-card p, .reflection p { margin: 0 0 10px; font-size: 18px; }
+ 
 .tags { margin-bottom: 12px; }
-
+ 
 .tag {
     display: inline-block;
-    margin-right: 6px;
+    margin: 0 6px 6px 0;
     padding: 2px 10px;
     border-radius: 20px;
     background: var(--accent);
     font-size: 14px;
 }
-
+ 
 .btn {
     display: inline-block;
     padding: 6px 14px;
@@ -376,58 +382,58 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     text-decoration: none;
     transition: background-color 0.2s;
 }
-
+ 
 .btn:hover { background: var(--accent-light); }
-
+ 
 .reflection { margin-top: 20px; padding-top: 15px; border-top: 2px solid var(--bg); }
 .coming-soon { margin: 10px 0 0; font-style: italic; text-align: center; }
-
+ 
 /* ============ Contact ============ */
-.contact h2{
-    font-size:40px;
-}
-
+.contact h2 { font-size: 40px; }
+ 
 .contact { max-width: 700px; margin: 20px auto; }
 .contact form { display: grid; gap: 18px; padding: 0 20px 10px; }
 .contact label { display: grid; gap: 6px; font-size: 18px; font-weight: bold; }
-
+ 
 .contact input:not(.hp), .contact textarea {
+    width: 100%;
     padding: 10px 12px;
     border: 2px solid var(--accent);
     border-radius: 6px;
     background: #fff;
     color: var(--ink);
     font: inherit;
+    font-size: 16px;            
     font-weight: normal;
 }
-
+ 
 .contact textarea { min-height: 140px; resize: vertical; }
 .contact input:focus, .contact textarea:focus { outline: 3px solid var(--accent-light); outline-offset: 1px; }
-
-.contact .hp { position: absolute; left: -9999px; }          
+ 
+.contact .hp { position: absolute; left: -9999px; }
 .char-count { justify-self: end; font-size: 14px; font-weight: normal; opacity: 0.8; }
-
+ 
 .contact .btn { justify-self: start; border: 0; font-family: inherit; cursor: pointer; }
 .contact .btn:disabled { opacity: 0.6; cursor: wait; }
-
+ 
 #form-status { min-height: 1.5em; font-size: 18px; }
 #form-status.success { color: #1f6f3a; }
 #form-status.error { color: #a12626; }
 #form-status a { color: inherit; }
-
+ 
 /* ============ Gallery ============ */
 .gallery { margin: 20px; }
 .gallery h2 { font-size: 40px; padding: 10px; }
-
+ 
 .mygallery, .friendgallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 24px;
     padding: 10px 20px;
 }
-
+ 
 .gallery-item { margin: 0; }
-
+ 
 .gallery-item img {
     display: block;
     width: 100%;
@@ -439,20 +445,21 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     cursor: zoom-in;
     transition: transform 0.25s, box-shadow 0.25s;
 }
-
+ 
 .gallery-item figcaption { display: none; }
-
+ 
 .gallery-item:hover img {
     transform: translateY(-6px) scale(1.03);
     box-shadow: 4px 10px 14px rgba(0, 0, 0, 0.4);
 }
-
+ 
 /* ============ Photo viewer (opens when a gallery photo is clicked) ============ */
 body:has(#viewer[open]) { overflow: hidden; }
-
+ 
 #viewer {
     max-width: 92vw;
     max-height: 92vh;
+    max-height: 92dvh;
     padding: 0;
     border: 0;
     border-radius: var(--radius);
@@ -460,20 +467,21 @@ body:has(#viewer[open]) { overflow: hidden; }
     color: var(--ink);
     overflow: hidden;
 }
-
+ 
 #viewer::backdrop { background: rgba(0, 0, 0, 0.8); }
-
+ 
 #viewer figure { margin: 0; }
-
+ 
 #viewer img {
     display: block;
     max-width: 92vw;
     max-height: calc(92vh - 60px);
+    max-height: calc(92dvh - 60px);
     object-fit: contain;
 }
-
+ 
 #viewer figcaption { display: none; }
-
+ 
 .viewer-btn {
     position: absolute;
     width: 44px;
@@ -486,24 +494,133 @@ body:has(#viewer[open]) { overflow: hidden; }
     line-height: 1;
     cursor: pointer;
 }
-
+ 
 .viewer-btn:hover { background: #fff; }
 .viewer-close { top: 10px; right: 10px; font-size: 30px; }
 .viewer-prev, .viewer-next { top: 50%; translate: 0 -50%; }
 .viewer-prev { left: 10px; }
 .viewer-next { right: 10px; }
-
+ 
+/* ============ Touch screens: no hover, so show captions always ============ */
+@media (hover: none) {
+    .media-item figcaption { opacity: 1; transform: none; }
+    .media-item:is(:hover, :focus) img,
+    .gallery-item:hover img { transform: none; }
+}
+ 
+/* ============ Tablets ============ */
+@media (max-width: 900px) {
+    .navbar { gap: 8px 16px; font-size: 18px; }
+    .about-me, .info-grid, .portfolio { margin: 16px; }
+    .about-me h1, .portfolio h1, .gallery h2, .contact h2 { font-size: 34px; }
+    .carousel-layout { gap: 24px; }
+    .carousel-layout .slide { width: 240px; }
+    .slide img { width: 180px; height: 180px; }
+}
+ 
 /* ============ Phones (last, so it overrides everything above) ============ */
 @media (max-width: 700px) {
-    .about-me, .info-grid, .carousel-layout { grid-template-columns: 1fr; }
-    .about-me img { grid-column: 1; grid-row: auto; justify-self: center; }
-    .carousel-layout { gap: 20px; min-height: 0; }
-    .carousel-layout .slide img { width: 160px; height: 160px; }
-    .hobby-viewer .arrow { flex-basis: 30px; width: 30px; font-size: 30px; }
-    .media-item { width: 110px; }
-    .contact { margin: 20px; }
+    /* navbar: compact, wraps neatly, still easy to tap */
+    .navbar {
+        justify-content: center;
+        gap: 4px 6px;
+        padding: 8px 10px;
+        font-size: 16px;
+    }
+    .navbar a { padding: 8px 10px; }
+ 
+    /* home */
+    .header-container {
+        flex-direction: column;
+        gap: 12px;
+        padding: 20px 16px 10px;
+        text-align: center;
+    }
+    .header-container img { width: 130px; height: 130px; }
+    .homecontent { padding: 16px 12px; margin-bottom: 10px; }
+    .homecontent p { font-size: 18px; }
+    .introduction { max-width: 100%; padding: 8px 16px; font-size: 17px; line-height: 1.55; }
+    .introduction p { text-align: left; }
+ 
+    /* about me */
+    .about-me, .info-grid { grid-template-columns: 1fr; margin: 12px; }
+    .about-me { padding: 8px 16px 0; }
+    .about-me h1 { margin-top: 10px; padding: 6px 0; font-size: 30px; }
+    .about-me p { font-size: 17px; }
+    .about-me img { grid-column: 1; grid-row: auto; justify-self: center; max-width: 75%; }
+ 
+    .info-grid { gap: 14px; }
+    .box { padding: 8px 14px 16px; }
+    .box h2 { font-size: 25px; }
+    .box p { padding: 10px 4px; font-size: 17px; }
+    .box-wide > p { text-wrap: pretty; }
+ 
+    /* carousels */
+    .carousel { gap: 6px; }
+    .carousel-layout { grid-template-columns: 1fr; gap: 16px; min-height: 0; }
+    .carousel-layout .slide { width: 100%; }
+    .carousel-layout .slide figcaption { min-height: 0; }
+    .slide img, .carousel-layout .slide img { width: 140px; height: 140px; }
+    .slide figcaption { font-size: 17px; }
+    .skill-year { font-size: 15px; }
+    .box .slide-description { text-align: left; text-indent: 0; hyphens: manual; }
+    .arrow { flex-basis: 40px; width: 40px; font-size: 40px; }
+ 
+    /* hobbies */
+    .hobby-viewer { gap: 2px; }
+    .hobby-viewer .arrow { flex-basis: 32px; width: 32px; font-size: 32px; }
+    .hobby-content h3 { font-size: 22px; }
+    .box .hobby-desc { margin-bottom: 18px; }
+    .media-grid { gap: 14px 10px; }
+    .media-item { width: calc(50% - 5px); max-width: 150px; }
+    .media-item figcaption { font-size: 15px; margin-top: 8px; }
+ 
+    /* portfolio */
+    .portfolio { margin: 12px; padding: 8px 14px 16px; }
+    .portfolio h1 { font-size: 30px; padding: 6px; }
+    .portfolio > p { font-size: 17px; }
+    .collapse { margin: 12px 0; }
+    .collapse summary { padding: 12px 14px; font-size: 19px; }
+    .collapse .count { margin-right: 8px; font-size: 12px; }
+    .collapse-content { padding: 0 12px 14px; font-size: 17px; }
+    .project-card { padding: 12px; }
+    .project-card h3, .reflection h3 { font-size: 20px; }
+    .project-card p, .reflection p { font-size: 16px; }
+    .btn { padding: 10px 16px; font-size: 16px; }
+ 
+    /* contact */
+    .contact { margin: 12px; }
+    .contact h2 { font-size: 30px; }
+    .contact form { padding: 0 6px 10px; }
+    .contact label { font-size: 16px; }
+    .contact .btn { width: 100%; justify-self: stretch; text-align: center; }
+ 
+    /* gallery: two columns */
+    .gallery { margin: 12px; }
+    .gallery h2 { font-size: 28px; padding: 6px; }
+    .mygallery, .friendgallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 6px;
+    }
+ 
+    /* photo viewer */
+    #viewer { max-width: 100vw; max-height: 100dvh; border-radius: 0; }
+    #viewer img { max-width: 100vw; max-height: calc(100dvh - 60px); }
+    .viewer-btn { width: 40px; height: 40px; }
+    .viewer-close { top: 8px; right: 8px; font-size: 26px; }
+    .viewer-prev { left: 6px; }
+    .viewer-next { right: 6px; }
 }
-
+ 
+/* ============ Very small phones ============ */
+@media (max-width: 380px) {
+    .navbar { font-size: 15px; }
+    .navbar a { padding: 8px 8px; }
+    .slide img, .carousel-layout .slide img { width: 120px; height: 120px; }
+    .collapse summary { font-size: 17px; }
+}
+ 
 /* ============ Accessibility ============ */
 @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
