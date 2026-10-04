@@ -51,7 +51,7 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     position: sticky;
     top: 0;
     z-index: 100;
-    view-transition-name: navbar;    /* stays in place while the page below fades */
+    view-transition-name: navbar;  
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -110,7 +110,7 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: contain;             /* keeps each logo's proportions */
+    object-fit: contain;           
 }
 
 .homecontent { padding: 25px 20px 20px; margin-bottom: 20px; }
@@ -404,7 +404,7 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
 .contact textarea { min-height: 140px; resize: vertical; }
 .contact input:focus, .contact textarea:focus { outline: 3px solid var(--accent-light); outline-offset: 1px; }
 
-.contact .hp { position: absolute; left: -9999px; }          /* hidden spam trap */
+.contact .hp { position: absolute; left: -9999px; }          
 .char-count { justify-self: end; font-size: 14px; font-weight: normal; opacity: 0.8; }
 
 .contact .btn { justify-self: start; border: 0; font-family: inherit; cursor: pointer; }
@@ -421,7 +421,7 @@ h1 { font-size: clamp(36px, 7vw, 80px); margin: 0; }
 
 .mygallery, .friendgallery {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));   /* as many columns as fit */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
     gap: 24px;
     padding: 10px 20px;
 }
